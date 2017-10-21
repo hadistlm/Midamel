@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         //
 
         /*
@@ -228,6 +229,8 @@ return [
         'Activation' => Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         'Reminder' => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
         'Sentinel' => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

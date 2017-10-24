@@ -14,8 +14,7 @@
                 <div class="panel-body">
                     <div class="tab-content">
                       <div id="home" class="tab-pane fade in active">
-                        {!! Form::open(['route'=>'signup.store', 'class'=>'form-horizontal', 'role'=>'form']) !!}
-                        {!! Form::hidden('noname', 'user', ['class'=>'hidden']) !!}
+                        {!! Form::open(['route'=>['signup.store', 'user'], 'class'=>'form-horizontal', 'role'=>'form']) !!}
                         <div class="form-group">
                             {!! Form::label('first_name', "First Name", ['class'=>'col-md-4 control-label']) !!}
                             <div class="col-md-6">
@@ -71,8 +70,7 @@
                       </div>
                     
                       <div id="menu1" class="tab-pane fade">
-                        {!! Form::open(['route'=>'signup.store', 'class'=>'form-horizontal', 'role'=>'form']) !!}
-                        {!! Form::hidden('noname', 'admin', ['class'=>'hidden']) !!}
+                        {!! Form::open(['route'=>['signup.store', 'admin'], 'class'=>'form-horizontal', 'role'=>'form']) !!}
                         <div class="form-group">
                             {!! Form::label('first_name', "Administrator Name", ['class'=>'col-md-4 control-label']) !!}
                             <div class="col-md-6">

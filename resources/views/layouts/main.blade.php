@@ -12,8 +12,11 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="{{asset('css')}}/style.css" rel="stylesheet">
+    <link href="{{asset('css')}}/pe-icon-7-stroke.css" rel="stylesheet">
     <link href="{{asset('plugins')}}/toastr/toastr.min.css" rel="stylesheet">
     <link href="{{asset('plugins')}}/iCheck/skins/square/grey.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('plugins') }}/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
 
     <!-- Scripts -->
     <script>
@@ -37,9 +40,15 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Midamel
-                    </a>
+                    @if (Sentinel::check())
+                        <a class="navbar-brand" href="{{ route('dashboard') }}">
+                            Midamel
+                        </a>
+                    @else
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            Midamel
+                        </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -51,29 +60,22 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/signup') }}">Register</a></li>
-                        @else
+                        @if (Sentinel::check())
+                            <li><a href="{{ route('dashboard') }}">Home</a></li>
+                            <li><a href="{{ route('profil.show', Sentinel::getUser('id')) }}">Profile</a></li>
+                            @if (Sentinel::inRole('admin'))
+                                <li><a href="{{ route('user.list') }}">Admin Panel</a></li>
+                                <li><a href="{{ route('jobs.index') }}">Jobs Panel</a></li>
+                            @endif
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ Sentinel::getUser()->first_name }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ route('logout') }}">Logout</a></li>
                                 </ul>
                             </li>
+                        @else
+                            <li><a href="{{ url('/login') }}">Login</a></li>
+                            <li><a href="{{ url('/signup') }}">Register</a></li>
                         @endif
                     </ul>
                 </div>
@@ -84,36 +86,14 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="{{asset('js')}}/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{{asset('js')}}/script.js"></script>
     <script type="text/javascript" src="{{asset('plugins')}}/toastr/toastr.min.js"></script>
     <script type="text/javascript" src="{{asset('plugins')}}/iCheck/js/icheck.min.js"></script>
+    <script type="text/javascript" src="{{ asset('plugins') }}/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            toastr.options = {
-              "closeButton": true,
-              "debug": false,
-              "newestOnTop": false,
-              "progressBar": false,
-              "positionClass": "toast-top-right",
-              "preventDuplicates": false,
-              "onclick": null,
-              "showDuration": "300",
-              "hideDuration": "1000",
-              "timeOut": "5000",
-              "extendedTimeOut": "1000",
-              "showEasing": "swing",
-              "hideEasing": "linear",
-              "showMethod": "fadeIn",
-              "hideMethod": "fadeOut"
-            }
-            $('.check').iCheck({
-                checkboxClass: 'icheckbox_square-grey',
-                radioClass: 'iradio_square-grey',
-                increaseArea: '20%'
-            });
-
-
             @if(Session::has('notice'))
                 toastr["success"]("{{Session::get('notice')}}", "Success")
             @endif

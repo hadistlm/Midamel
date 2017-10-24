@@ -15,5 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//dashboard Routes
+Route::get('home', 'HomesController@index')->name('dashboard');
+
+//Auth Routes
 Route::get('signup', 'UsersController@signup')->name('signup');
-Route::post('signup-store', 'UsersController@store')->name('signup.store');
+Route::post('/signup-store/{role}', 'UsersController@store')->name('signup.store');
+
+Route::resource('profil', 'ProfilsController');
+
+//Management Routes
+Route::get('control-panel', 'UsersController@userList')->name('user.list');
+Route::delete('control-panel/{id}', 'UsersController@delete')->name('user.delete');
+Route::resource('jobs', 'JobsController');
+Route::post('regis-jobs/{id}/', 'HomesController@regis')->name('jobs.regis');
+
+//Session Routes
+Route::get('login', 'SessionsController@login')->name('login');
+Route::post('login-store', 'SessionsController@loginStore')->name('login.store');
+Route::get('logout', 'SessionsController@logout')->name('logout');

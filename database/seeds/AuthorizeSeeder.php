@@ -26,17 +26,7 @@ class AuthorizeSeeder extends Seeder
         $role_writer = [
         	'slug' => "user",
         	'name' => "User",
-        	'permissions' => [
-        		'articles.index' => true,
-        		'articles.create' => true,
-        		'articles.store' => true,
-        		'articles.show' => true,
-        		'articles.edit' => true,
-        		'articles.update' => true,
-        		'add' => true,
-        		'change' => true,
-        		'delete' => true
-        	]
+        	'permissions' => []
         ];
 
         Sentinel::getRoleRepository()->createModel()->fill($role_writer)->save();

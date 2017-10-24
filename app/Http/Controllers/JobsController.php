@@ -9,6 +9,11 @@ use Session;
 
 class JobsController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('sentinel');
+    }
+
     public function index()
     {
     	$data = Job::all();

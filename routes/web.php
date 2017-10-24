@@ -29,6 +29,8 @@ Route::get('control-panel', 'UsersController@userList')->name('user.list');
 Route::delete('control-panel/{id}', 'UsersController@delete')->name('user.delete');
 Route::resource('jobs', 'JobsController');
 Route::post('regis-jobs/{id}/', 'HomesController@regis')->name('jobs.regis');
+Route::get('jobs-download/{user}/{set}', 'HomesController@fileDownload')->name('jobs.download');
+Route::put('jobs-status/{user}/{job}', 'HomesController@changeStatus')->name('jobs.status');
 
 //Session Routes
 Route::get('login', 'SessionsController@login')->name('login');

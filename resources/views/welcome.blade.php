@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="links">
-                    <p>Find your prefered jobs here based on your major skills, Make sure you find happiness on your selected jobs.</p><br>
+                    <p>Engke lamun dipigawe omat kudu tetep nginget ka gusti agung. mung gaduh gaji leuwihna tur tabung jang gegeberan dihari esok.</p><br>
                     <h6>- Works hard, Play harder -</h6>
                 </div>
             </div>
